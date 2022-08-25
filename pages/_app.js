@@ -3,7 +3,7 @@ import '../styles/globals.scss';
 
 const MyApp = ({ Component, pageProps }) => (
   <Layout>
-    <Component {...pageProps} />;
+    <Component {...pageProps} />
   </Layout>
 );
 

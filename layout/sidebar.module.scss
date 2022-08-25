@@ -1,0 +1,102 @@
+@import '../styles/variables.scss';
+
+.sidebar_container {
+  min-width: 300px;
+  width: 300px;
+  background: #022436;
+  padding: 0 10px;
+  overflow-y: auto;
+
+  .header {
+    position: sticky;
+    top: 0;
+    background: #022436;
+    padding-top: 10px;
+    z-index: 1;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .logo {
+        font-weight: 700;
+        color: $primary-color;
+        letter-spacing: 2px;
+        font-size: 40px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        svg {
+          font-size: 40px;
+          cursor: default;
+        }
+      }
+
+      svg {
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+    input {
+      width: 100%;
+      padding: 7px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin: 10px 0;
+      background: $bg-color;
+
+      :focus-within {
+        outline: none;
+        border: 1px solid $primary-color;
+      }
+    }
+  }
+
+  .sidebar_items {
+    li {
+      display: flex;
+      gap: 10px;
+      cursor: pointer;
+      padding: 15px 0;
+      border-bottom: 2px dashed $bg-color;
+      transition: all 1s ease-in-out;
+
+      :hover {
+        opacity: 0.5;
+      }
+
+      svg {
+        font-size: 35px;
+      }
+
+      div {
+        flex: 1;
+        overflow: hidden;
+
+        h3 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          time {
+            font-size: 12px;
+          }
+        }
+
+        p {
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+          color: rgb(133, 128, 128);
+        }
+        .unread {
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

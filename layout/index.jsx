@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './layout.module.scss';
+import Sidebar from './SideBar';
 
 const Layout = ({ children }) => {
   return (
-    <main>
-      <h2>This is topBar</h2>
-      <h2>This is sidebar</h2>
-      <div>{children}</div>
+    <main className={styles.container}>
+      <Sidebar />
+      <div className={styles.conversation}>{children}</div>
     </main>
   );
 };
