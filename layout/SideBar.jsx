@@ -1,6 +1,7 @@
 import gsap from 'gsap-trial';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiChatSmile2Line } from 'react-icons/ri';
 import { TbAccessPoint } from 'react-icons/tb';
@@ -63,6 +64,11 @@ const Sidebar = () => {
           </Link>
         ))}
       </ul>
+      <div className={styles.add_friend}>
+        <button>
+          <AiOutlineUsergroupAdd /> Add Friend
+        </button>
+      </div>
     </div>
   );
 };
