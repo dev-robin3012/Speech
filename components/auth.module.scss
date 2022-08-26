@@ -1,0 +1,19 @@
+@import '../styles/variables.scss';
+
+.auth_wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px lightblue;
+    .logo {
+      font-weight: 700;
+      color: $primary-color;
+      letter-spacing: 2px;
+      font-size: 40px;
+    }
+  }
+}
