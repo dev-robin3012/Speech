@@ -46,6 +46,22 @@ const Sidebar = () => {
             </li>
           </Link>
         ))}
+        {users.map((user, i) => (
+          <Link href={user.id} key={user.id}>
+            <li className="animate__animated animate__zoomIn">
+              <FaUserCircle />
+              <div>
+                <h3>
+                  <span>
+                    {user.name} <TbAccessPoint className="online" />
+                  </span>
+                  <time>2min ago</time>
+                </h3>
+                <p className={i % 2 === 0 && styles.unread}>{user.message}</p>
+              </div>
+            </li>
+          </Link>
+        ))}
       </ul>
     </div>
   );

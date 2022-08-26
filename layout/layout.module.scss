@@ -33,10 +33,21 @@
 
   @media (max-width: 600px) {
     .sidebar {
+      position: absolute;
+      top: 0%;
+      bottom: 0%;
+      left: 0;
+      right: 0;
       width: 100%;
+      z-index: 100;
     }
-    .conversation {
+
+    .sidebar_small_style {
       display: none;
+    }
+
+    .conversation_small_style {
+      display: block;
       width: 100%;
     }
   }

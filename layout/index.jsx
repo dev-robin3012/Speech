@@ -9,11 +9,19 @@ const Layout = ({ children }) => {
 
   return (
     <main className={styles.container}>
-      <div className={styles.sidebar}>
+      <div
+        className={`${styles.sidebar} ${userId && styles.sidebar_small_style}`}
+      >
         <Sidebar />
       </div>
 
-      <div className={styles.conversation}>{children}</div>
+      <div
+        className={`${styles.conversation} ${
+          userId && styles.conversation_small_style
+        }`}
+      >
+        {children}
+      </div>
     </main>
   );
 };

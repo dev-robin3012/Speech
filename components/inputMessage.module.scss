@@ -25,5 +25,16 @@
       font-size: 18px;
       font-weight: 700;
     }
+
+    @media (max-width: 480px) {
+      textarea {
+        font-size: 16px;
+        padding: 7px 10px;
+      }
+      button {
+        padding: 0 15px;
+        font-size: 15px;
+      }
+    }
   }
 }
