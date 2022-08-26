@@ -1,11 +1,9 @@
 @import '../styles/variables.scss';
 
 .sidebar_container {
-  min-width: 300px;
-  width: 300px;
-  background: #022436;
   padding: 0 10px;
   overflow-y: auto;
+  color: azure;
 
   .header {
     position: sticky;
@@ -43,14 +41,15 @@
       width: 100%;
       padding: 7px 10px;
       border: none;
+      outline: none;
       border-radius: 5px;
       font-size: 16px;
       margin: 10px 0;
       background: $bg-color;
+      color: #f0ffff;
 
-      :focus-within {
-        outline: none;
-        border: 1px solid $primary-color;
+      &:focus {
+        outline: 1px solid $primary-color;
       }
     }
   }
@@ -81,6 +80,11 @@
           align-items: center;
           justify-content: space-between;
 
+          span {
+            svg {
+              font-size: 15px;
+            }
+          }
           time {
             font-size: 12px;
           }
@@ -100,3 +104,9 @@
     }
   }
 }
+
+// @media (max-width: 600px) {
+//   .sidebar_container {
+//     width: 100%;
+//   }
+// }

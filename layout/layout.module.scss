@@ -4,11 +4,19 @@
   margin: auto;
   display: flex;
 
+  .sidebar {
+    min-width: 300px;
+    width: 300px;
+    background: #022436;
+  }
+
   .conversation {
     width: calc(100% - 300px);
     position: relative;
     text-align: center;
     z-index: 1;
+    padding: 10px;
+    overflow: hidden;
 
     ::after {
       position: absolute;
@@ -20,6 +28,16 @@
       background: url(../assets/bg.png);
       opacity: 0.04;
       z-index: -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .sidebar {
+      width: 100%;
+    }
+    .conversation {
+      display: none;
+      width: 100%;
     }
   }
 }

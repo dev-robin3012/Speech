@@ -1,0 +1,29 @@
+@import '../styles/variables.scss';
+
+.input_wrapper {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  left: 10px;
+
+  div {
+    display: flex;
+
+    textarea {
+      flex-grow: 1;
+      font-size: 18px;
+      padding: 10px 15px;
+      border: none;
+      outline: none;
+    }
+    button {
+      padding: 0px 30px;
+      cursor: pointer;
+      background: $primary-color;
+      border: 2px solid $primary-color;
+      color: $bg-color;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+}

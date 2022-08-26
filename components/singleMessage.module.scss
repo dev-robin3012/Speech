@@ -1,0 +1,63 @@
+.sent_message {
+  display: flex;
+  justify-content: end;
+  flex-direction: row-reverse;
+  gap: 10px;
+  padding: 20px 50px;
+  border-bottom: 1px dashed gray;
+
+  div {
+    background: palegoldenrod;
+    padding: 7px 10px;
+    position: relative;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    text-align: start;
+    max-width: 60%;
+
+    small {
+      font-size: 11px;
+      color: gray;
+      margin-left: auto;
+    }
+  }
+  .avatar {
+    font-size: 35px;
+    color: azure;
+  }
+}
+
+.received_message {
+  display: flex;
+  gap: 10px;
+  padding: 20px 50px;
+  border-bottom: 1px dashed gray;
+
+  div {
+    background: azure;
+    padding: 10px;
+    position: relative;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: start;
+    max-width: 60%;
+
+    small {
+      font-size: 11px;
+      color: gray;
+    }
+  }
+  .avatar {
+    font-size: 35px;
+    color: azure;
+  }
+}
+
+@media (max-width: 768px) {
+  .sent_message,
+  .received_message {
+    padding: 10px;
+  }
+}

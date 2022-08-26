@@ -26,10 +26,15 @@ a {
 ::-webkit-scrollbar-thumb {
   border: 1px solid $primary-color;
   border-radius: 50px;
+  background: $bg-color;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.online {
+  color: $primary-color;
 }
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+// }

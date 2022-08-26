@@ -1,7 +1,10 @@
 import gsap from 'gsap-trial';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiChatSmile2Line } from 'react-icons/ri';
+import { TbAccessPoint } from 'react-icons/tb';
+import users from '../assets/dummyUsers';
 import styles from './sidebar.module.scss';
 
 const Sidebar = () => {
@@ -27,19 +30,21 @@ const Sidebar = () => {
       </div>
 
       <ul className={styles.sidebar_items}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-          <li key={i} className="animate__animated animate__zoomIn">
-            <FaUserCircle />
-            <div>
-              <h3>
-                Shahadat Robin <time>2min ago</time>
-              </h3>
-              <p className={i % 2 === 0 && styles.unread}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Officiis quaerat
-              </p>
-            </div>
-          </li>
+        {users.map((user, i) => (
+          <Link href={user.id} key={user.id}>
+            <li className="animate__animated animate__zoomIn">
+              <FaUserCircle />
+              <div>
+                <h3>
+                  <span>
+                    {user.name} <TbAccessPoint className="online" />
+                  </span>
+                  <time>2min ago</time>
+                </h3>
+                <p className={i % 2 === 0 && styles.unread}>{user.message}</p>
+              </div>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
