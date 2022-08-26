@@ -8,6 +8,7 @@ const Auth = () => {
         <h1 className={styles.logo}>Speech</h1>
         <form>
           <h2>Sign In</h2>
+          <input type="" />
         </form>
       </div>
     </div>
