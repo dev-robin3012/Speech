@@ -8,7 +8,6 @@ import Sidebar from './SideBar';
 
 const Layout = ({ children }) => {
   const loggedUser = useSelector(user);
-  console.log(loggedUser);
 
   const router = useRouter();
   const { userId } = router.query;
