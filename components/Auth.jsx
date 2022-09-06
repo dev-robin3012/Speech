@@ -2,13 +2,28 @@ import React from 'react';
 import styles from './auth.module.scss';
 
 const Auth = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('+88' + e.target.number.value);
+  };
+
   return (
     <div className={styles.auth_wrapper}>
       <div className={styles.content}>
         <h1 className={styles.logo}>Speech</h1>
-        <form>
-          <h2>Sign In</h2>
-          <input type="" />
+        <form onSubmit={handleSubmit}>
+          <div className={styles.input_group}>
+            <span>+88</span>
+            <input
+              type="text"
+              placeholder="Enter your number"
+              name="number"
+              pattern="[0-9]+"
+              title="Accept only number"
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
         </form>
       </div>
     </div>

@@ -28,33 +28,11 @@ const handleAuth = async (req, res) => {
 
     console.log(response);
 
-    // const user = await User.create(req.body);
-    return res
-      .status(201)
-      .send({ message: 'User Created Successfully.', credentials: user });
+    return res.status(201).send({ message: 'User Created Successfully.' });
   } catch (error) {
     res.status(500).send('Server error');
     console.log('auth error:', error);
   }
 };
-
-// const sendVerificationMessage = (params, mobileNumber) => {
-//   return courier.send({
-//     message: {
-//       to: {
-//         data: params,
-//         phone_number: mobileNumber,
-//       },
-//       content: {
-//         title: 'XYZ Verification',
-//         body: 'Hi {{name}},\nYour verification code for XYZ is {{otp}}.',
-//       },
-//       routing: {
-//         method: 'single',
-//         channels: ['sms'],
-//       },
-//     },
-//   });
-// };
 
 export default handleAuth;

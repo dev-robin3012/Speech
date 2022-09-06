@@ -9,11 +9,54 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px lightblue;
+    text-align: center;
     .logo {
       font-weight: 700;
       color: $primary-color;
       letter-spacing: 2px;
       font-size: 40px;
+    }
+
+    form {
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+
+      gap: 10px;
+      margin-top: 20px;
+
+      .input_group {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        padding: 0 10px;
+        border-radius: 5px;
+
+        span {
+          font-size: 17px;
+          font-weight: 700;
+        }
+
+        input {
+          outline: none;
+          border: none;
+          width: 100%;
+          padding: 8px 5px;
+          font-size: 17px;
+          font-weight: 600;
+        }
+      }
+
+      button {
+        padding: 5px;
+        font-weight: 800;
+        width: 40%;
+        margin: auto;
+        cursor: pointer;
+        background: $primary-color;
+        border: none;
+        border-radius: 5px;
+      }
     }
   }
 }
