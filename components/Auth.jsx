@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React from 'react';
 import styles from './auth.module.scss';
 
 const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('+88' + e.target.number.value);
+    const phone = '+88' + e.target.number.value;
+    const { data } = await axios.post('/api/auth', { phone });
+    console.log(data);
   };
 
   return (

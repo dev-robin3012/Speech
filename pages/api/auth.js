@@ -1,5 +1,6 @@
 import { CourierClient } from '@trycourier/courier';
 import dbConnection from '../../lib/db.connection';
+import vonage from '../../lib/vonage.init';
 import User from '../../model/user.model';
 
 const courier = CourierClient({
@@ -12,21 +13,34 @@ const handleAuth = async (req, res) => {
   try {
     const user = await User.findOne({ phone: req.body.phone });
 
+    console.log({ user });
     if (user) return res.status(200).send({ credentials: user });
 
-    const response = await courier.send({
-      message: {
-        to: {
-          phone_number: req.body.phone,
-        },
-        template: 'NHG40XN35K4DG9H2PS4MCS7WQMJG',
-        data: {
-          recipientName: 'Shahadat Robin',
-        },
-      },
-    });
+    await vonage.verify.request(
+      { number: req.body.phone, brand: 'Vonage' },
+      (err, result) => {
+        if (err) {
+          console.error('sending err:', err);
+        } else {
+          const verifyRequestId = result.request_id;
+          console.log('request_id', verifyRequestId);
+        }
+      }
+    );
 
-    console.log(response);
+    // const response = await courier.send({
+    //   message: {
+    //     to: {
+    //       phone_number: req.body.phone,
+    //     },
+    //     template: 'NHG40XN35K4DG9H2PS4MCS7WQMJG',
+    //     data: {
+    //       recipientName: 'Shahadat Robin',
+    //     },
+    //   },
+    // });
+
+    // console.log(response);
 
     return res.status(201).send({ message: 'User Created Successfully.' });
   } catch (error) {
