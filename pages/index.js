@@ -20,7 +20,7 @@ export default function LandingPage() {
       {loggedUser ? (
         <h1>Hello World</h1>
       ) : (
-        <div className={styles.wrapper}>
+        <div className={styles.landing_wrapper}>
           <div className={styles.content}>
             <div>
               <h1>Speech</h1>

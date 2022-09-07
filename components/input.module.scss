@@ -1,0 +1,38 @@
+@import '../styles/variables.scss';
+
+.input_group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: azure;
+  border-radius: 5px;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-right: 7px;
+  border: 2px solid azure;
+  transition: all 0.5s ease;
+
+  svg {
+    font-size: 20px;
+    color: darkslategrey;
+  }
+
+  input {
+    padding: 5px 10px;
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    outline: none;
+    background: azure;
+    font-weight: 550;
+  }
+
+  &:focus-within {
+    border: 2px solid $primary-color;
+  }
+
+  .hidePassword,
+  .showPassword {
+    cursor: pointer;
+  }
+}
