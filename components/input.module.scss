@@ -1,76 +1,71 @@
 @import '../styles/variables.scss';
 
-.input_container {
+.input_group {
+  display: flex;
+  align-items: center;
+  background: azure;
+  border-radius: 5px;
+  padding: 5px 7px 5px 10px;
+  border: 2px solid azure;
   position: relative;
+  transition: border 0.5s ease;
 
-  .input_group {
-    display: flex;
-    align-items: center;
+  svg {
+    font-size: 20px;
+    color: darkslategrey;
+  }
+
+  input {
+    padding: 7px 10px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 550;
+    outline: none;
     background: azure;
-    border: 1px solid azure;
-    border-radius: 5px;
-    overflow: hidden;
-    padding: 5px 7px 5px 10px;
-    transition: all 0.5s ease;
-    border: 2px solid azure;
 
-    svg {
-      font-size: 20px;
-      color: darkslategrey;
-    }
-
-    input {
-      padding: 7px 10px;
-      width: 100%;
-      border: none;
-      font-size: 17px;
+    &::placeholder {
+      font-size: 15px;
+      color: azure;
       font-weight: 550;
-      outline: none;
-      background: azure;
-
-      &::placeholder {
-        color: azure;
-        transition: color ease 0.3s;
-      }
-    }
-
-    .hidePassword,
-    .showPassword {
-      cursor: pointer;
+      transition: all ease 0.3s;
     }
   }
 
-  .label_in {
+  .hidePassword,
+  .showPassword {
+    cursor: pointer;
+  }
+
+  label {
     position: absolute;
-    color: gray;
     left: 40px;
-    top: 15px;
-    font-size: 17px;
+    transform: translateY(0);
+    font-size: 16px;
     font-weight: 550;
+    color: gray;
     cursor: text;
     transition: transform 300ms;
   }
 
-  &:focus-within {
-    .label_in {
+  &:focus-within,
+  input:not(:placeholder-shown) ~ {
+    border: 2px solid $primary-color;
+
+    label {
       transition: transform 300ms, background 500ms ease-in;
-      transform: translateY(-105%) scale(0.7);
+      transform: translateY(-94%) scale(0.7);
+      transform-origin: left;
       background: $bg-color;
-      padding: 2px 20px;
+      padding: 2px 15px;
       border-radius: 20px;
       border: 1px solid $primary-color;
       color: azure;
-      left: 20px;
+      left: 30px;
     }
 
-    .input_group {
-      border: 2px solid $primary-color;
-      input {
-        &::placeholder {
-          color: rgb(136, 167, 167);
-          font-weight: 550;
-        }
-      }
+    input::placeholder {
+      color: #aab3bd;
     }
   }
 }
