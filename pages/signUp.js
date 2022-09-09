@@ -34,31 +34,35 @@ const SignUp = () => {
         </div>
 
         <Input
-          placeholder="Name"
+          placeholder="Enter your name"
+          label="Name"
           name="name"
           prefix={<FiUser />}
           onChange={handleChange}
         />
 
         <Input
-          placeholder="Email"
+          placeholder="Enter your Email"
           type="email"
+          label="Email"
           name="email"
           prefix={<MdAlternateEmail />}
           onChange={handleChange}
         />
 
         <Input
-          placeholder="Password"
+          placeholder="Enter Your Password"
           name="password"
+          label="Password"
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}
         />
 
         <Input
-          placeholder="Confirm Password"
+          placeholder="Should Match with password"
           name="confirm_password"
+          label="Confirm Password"
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}

@@ -25,8 +25,19 @@ const signIn = () => {
           <p>You and your friends always connected.</p>
         </div>
 
-        <Input placeholder="Email" prefix={<FiUser />} />
-        <Input placeholder="Password" type="password" prefix={<MdPassword />} />
+        <Input
+          placeholder="Enter your Email"
+          label="Email"
+          name="email"
+          prefix={<FiUser />}
+        />
+        <Input
+          placeholder="Enter your Password"
+          label="Password"
+          name="password"
+          type="password"
+          prefix={<MdPassword />}
+        />
 
         <Button label="Sign In" type="button" icon={<BiLogIn />} />
 
