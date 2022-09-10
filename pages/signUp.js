@@ -10,13 +10,18 @@ import AuthLayout from '../layout/AuthLayout';
 import styles from '../styles/auth.module.scss';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState();
 
-  const handleChange = ({ target }) =>
+  const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
+  };
 
-  const handleRegister = async () => {
-    console.log({ formData });
+  // console.log(formData);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(formData);
   };
 
   return (
@@ -27,7 +32,7 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <form className={styles.auth_form}>
+      <form className={styles.auth_form} onSubmit={handleRegister}>
         <div>
           <h1>Register</h1>
           <p>You and your friends always connected.</p>
@@ -39,6 +44,7 @@ const SignUp = () => {
           name="name"
           prefix={<FiUser />}
           onChange={handleChange}
+          validation={/^[A-Z]+/}
         />
 
         <Input
@@ -48,6 +54,7 @@ const SignUp = () => {
           name="email"
           prefix={<MdAlternateEmail />}
           onChange={handleChange}
+          validation={/^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/}
         />
 
         <Input
@@ -57,6 +64,7 @@ const SignUp = () => {
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}
+          validation={/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/}
         />
 
         <Input
@@ -66,13 +74,20 @@ const SignUp = () => {
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}
+          validation={new RegExp(formData.password)}
         />
+
+        <div>
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+          <label htmlFor="vehicle1">I have a bike</label>
+        </div>
 
         <Button
           label="Sign Up"
-          type="button"
+          type="submit"
+          disabled
           icon={<TbUserPlus />}
-          onClick={handleRegister}
+          // onClick={handleRegister}
         />
 
         <p>
@@ -81,6 +96,10 @@ const SignUp = () => {
       </form>
     </AuthLayout>
   );
+};
+
+const validation = (data) => {
+  console.log(data);
 };
 
 export default SignUp;
