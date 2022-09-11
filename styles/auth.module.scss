@@ -12,6 +12,12 @@
   flex-direction: column;
   gap: 20px;
 
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   a {
     color: $primary-color;
     font-size: 17px;

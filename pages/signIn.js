@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { BiLogIn } from 'react-icons/bi';
 import { FiUser } from 'react-icons/fi';
 import { MdPassword } from 'react-icons/md';
@@ -10,7 +10,18 @@ import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
 import styles from '../styles/auth.module.scss';
 
-const signIn = () => {
+const SignIn = () => {
+  const [formData, setFormData] = useState({});
+
+  const validation = {
+    email: /^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/,
+    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+  };
+
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
+  };
+
   return (
     <AuthLayout>
       <Head>
@@ -26,20 +37,42 @@ const signIn = () => {
         </div>
 
         <Input
-          placeholder="Enter your Email"
+          placeholder="something@mail.com"
+          type="email"
           label="Email"
           name="email"
           prefix={<FiUser />}
-        />
-        <Input
-          placeholder="Enter your Password"
-          label="Password"
-          name="password"
-          type="password"
-          prefix={<MdPassword />}
+          onChange={handleChange}
+          validation={{
+            pattern: validation.email,
+            message: 'Try with valid email format.',
+          }}
         />
 
-        <Button label="Sign In" type="button" icon={<BiLogIn />} />
+        <Input
+          placeholder="Enter Your Password"
+          name="password"
+          label="Password"
+          type="password"
+          prefix={<MdPassword />}
+          onChange={handleChange}
+          validation={{
+            pattern: validation.password,
+            message: 'Min length 6 with capital and small letter.',
+          }}
+        />
+
+        <Button
+          label="Sign In"
+          disabled={
+            !formData.email ||
+            !validation.email.test(formData.email) ||
+            !formData.password ||
+            !validation.password.test(formData.password)
+          }
+          type="button"
+          icon={<BiLogIn />}
+        />
 
         <p>
           Don't have account ? <Link href="/signUp">Register</Link>
@@ -49,4 +82,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default SignIn;

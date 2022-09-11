@@ -11,13 +11,17 @@ import styles from '../styles/auth.module.scss';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
-  const [errors, setErrors] = useState();
+
+  const validation = {
+    name: /^[A-Z]+/,
+    email: /^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/,
+    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+    confirm_password: new RegExp(formData.password),
+  };
 
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
-
-  // console.log(formData);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -44,17 +48,23 @@ const SignUp = () => {
           name="name"
           prefix={<FiUser />}
           onChange={handleChange}
-          validation={/^[A-Z]+/}
+          validation={{
+            pattern: validation.name,
+            message: 'Name should be capitalize.',
+          }}
         />
 
         <Input
-          placeholder="Enter your Email"
+          placeholder="something@mail.com"
           type="email"
           label="Email"
           name="email"
           prefix={<MdAlternateEmail />}
           onChange={handleChange}
-          validation={/^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/}
+          validation={{
+            pattern: validation.email,
+            message: 'Try with valid email format.',
+          }}
         />
 
         <Input
@@ -64,7 +74,10 @@ const SignUp = () => {
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}
-          validation={/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/}
+          validation={{
+            pattern: validation.password,
+            message: 'Min length 6 with capital and small letter.',
+          }}
         />
 
         <Input
@@ -74,18 +87,39 @@ const SignUp = () => {
           type="password"
           prefix={<MdPassword />}
           onChange={handleChange}
-          validation={new RegExp(formData.password)}
+          validation={{
+            pattern: validation.confirm_password,
+            message: "Doesn't match with password.",
+          }}
         />
 
-        <div>
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-          <label htmlFor="vehicle1">I have a bike</label>
+        <div className={styles.checkbox}>
+          <input
+            type="checkbox"
+            id="agree"
+            name="agree"
+            value="agree"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.checked })
+            }
+          />
+          <label htmlFor="agree">I agree with the Terms and Conditions.</label>
         </div>
 
         <Button
           label="Sign Up"
           type="submit"
-          disabled
+          disabled={
+            !formData.name ||
+            !validation.name.test(formData.name) ||
+            !formData.email ||
+            !validation.email.test(formData.email) ||
+            !formData.password ||
+            !validation.password.test(formData.password) ||
+            !formData.confirm_password ||
+            !validation.confirm_password.test(formData.confirm_password) ||
+            !formData?.agree
+          }
           icon={<TbUserPlus />}
           // onClick={handleRegister}
         />
@@ -96,10 +130,6 @@ const SignUp = () => {
       </form>
     </AuthLayout>
   );
-};
-
-const validation = (data) => {
-  console.log(data);
 };
 
 export default SignUp;

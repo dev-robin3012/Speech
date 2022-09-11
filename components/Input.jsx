@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { BsInfoCircleFill } from 'react-icons/bs';
 import styles from './input.module.scss';
 
 const Input = ({
@@ -13,10 +14,13 @@ const Input = ({
   ...rest
 }) => {
   const [isValid, setIsValid] = useState(true);
+  const [validTip, setValidTip] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef();
 
-  const checkValidation = (e) => setIsValid(validation.test(e.target.value));
+  const checkValidation = (e) => {
+    setIsValid(validation.pattern.test(e.target.value));
+  };
 
   return (
     <div className={`${styles.input_group} ${!isValid && styles.error}`}>
@@ -31,9 +35,16 @@ const Input = ({
           setIsValid(true);
           onChange(e);
         }}
-        onBlur={(e) => validation && checkValidation(e)}
+        onBlur={(e) => validation.pattern && checkValidation(e)}
         {...rest}
       />
+
+      {!isValid && (
+        <div className={styles.error_tip}>
+          <BsInfoCircleFill className={styles.error_info} />
+          <small className={styles.error_message}>* {validation.message}</small>
+        </div>
+      )}
 
       {type === 'password' &&
         (!showPassword ? (
