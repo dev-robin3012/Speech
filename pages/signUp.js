@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -11,6 +12,7 @@ import styles from '../styles/auth.module.scss';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const validation = {
     name: /^[A-Z]+/,
@@ -23,9 +25,18 @@ const SignUp = () => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.log(formData);
+
+    try {
+      const { data } = await axios.post('/api/signup', formData);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.log('signUp error:', error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -109,6 +120,7 @@ const SignUp = () => {
         <Button
           label="Sign Up"
           type="submit"
+          loading={loading}
           disabled={
             !formData.name ||
             !validation.name.test(formData.name) ||
@@ -118,10 +130,10 @@ const SignUp = () => {
             !validation.password.test(formData.password) ||
             !formData.confirm_password ||
             !validation.confirm_password.test(formData.confirm_password) ||
-            !formData?.agree
+            !formData?.agree ||
+            loading
           }
           icon={<TbUserPlus />}
-          // onClick={handleRegister}
         />
 
         <p>
