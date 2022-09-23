@@ -1,16 +1,9 @@
-import { createTransport } from 'nodemailer';
+import { hash } from 'bcrypt';
+import emailTemplate from '../../assets/emailTemplate';
 import dbConnection from '../../lib/db.connection';
+import transporter from '../../lib/mailTransporter';
 import User from '../../model/user.model';
-
-const transporter = createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  secure: false,
-  auth: {
-    user: process.env.smtp_email,
-    pass: process.env.smtp_pass,
-  },
-});
+import otpGenerate from '../../utils/otpGenerate';
 
 const handleSignup = async (req, res) => {
   await dbConnection();
@@ -18,41 +11,32 @@ const handleSignup = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    if (user)
+    if (user && user.isVerified)
       return res
         .status(409)
         .send({ message: 'This email is already registered.' });
+
+    const otp = otpGenerate();
+
+    const hashPass = await hash('robin123', 10);
+
+    const saveUser = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: hashPass,
+      isVerified: false,
+    });
 
     const message = {
       from: `"Speech" <${process.env.smtp_email}>`,
       to: 'sh.robin025@gmail.com',
       subject: 'Verify User',
-      html: `<div style="font-size:18px;">
-      <p>Hi ${req.body.name}!</p>
-
-      <p>Your verification code is</p>
-      <p style="font-size:25px;">456987</p>
-
-      <p>
-        Enter this code in our [website or app] to activate your account.
-      </p>
-
-      <p>Click here [open code in app] to open the [app/portal landing page].</p>
-
-      <p>
-        If you have any questions, send us an email to support team.
-      </p>
-      
-      <p style="margin:0;">We’re glad you’re here!</p>
-
-      <br/>
-      <p>The Speech team</p>
-      </div>`,
+      html: emailTemplate(req.body.name, otp),
     };
 
     const result = await transporter.sendMail(message);
 
-    console.log(result);
+    // console.log(result);
 
     return res.status(201).send({ message: 'User Created Successfully.' });
   } catch (error) {
