@@ -1,47 +1,49 @@
 import { hash } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import emailTemplate from '../../assets/emailTemplate';
 import dbConnection from '../../lib/db.connection';
-import transporter from '../../lib/mailTransporter';
 import User from '../../model/user.model';
 import otpGenerate from '../../utils/otpGenerate';
 
-const handleSignup = async (req, res) => {
+const handleSignup = async (req, res, next) => {
   await dbConnection();
 
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    if (user && user.isVerified)
-      return res
-        .status(409)
-        .send({ message: 'This email is already registered.' });
+    if (user) return res.status(409).send('This email is already registered.');
 
-    const otp = otpGenerate();
+    const otp = await otpGenerate();
 
-    const hashPass = await hash('robin123', 10);
+    // const verifyToken = await hash(otp.toString(), 10);
+    const hashPass = await hash(req.body.password, 10);
 
     const saveUser = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: hashPass,
-      isVerified: false,
     });
+
+    delete saveUser._doc.password;
+
+    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '1h' });
 
     const message = {
       from: `"Speech" <${process.env.smtp_email}>`,
-      to: 'sh.robin025@gmail.com',
+      to: req.body.email,
       subject: 'Verify User',
       html: emailTemplate(req.body.name, otp),
     };
 
-    const result = await transporter.sendMail(message);
+    // await transporter.sendMail(message);
 
-    // console.log(result);
-
-    return res.status(201).send({ message: 'User Created Successfully.' });
+    return res.status(201).send({
+      message: 'Sign Up Successful.',
+      user: { ...saveUser._doc, accessToken },
+    });
   } catch (error) {
-    res.status(500).send('Server error');
-    console.log('auth error:', error);
+    res.status(500).send('Something wrong in server. Try again...');
+    console.log(error);
   }
 };
 
