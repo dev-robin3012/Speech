@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import landingImage from '../assets/chat.gif';
+import Button from '../components/Button';
 import { user } from '../redux/reducers/user.reducer';
 import styles from '../styles/landingPage.module.scss';
 
@@ -30,8 +31,9 @@ export default function LandingPage() {
               <Image src={landingImage} alt="" layout="fill" />
             </div>
             <Link href="/signUp">
-              <button className={styles.signUp}>Sign Up</button>
+              <Button label="Sign Up"></Button>
             </Link>
+
             <Link href="/signIn">
               <button className={styles.signIn}>Sign In</button>
             </Link>

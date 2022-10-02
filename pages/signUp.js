@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { MdAlternateEmail, MdPassword } from 'react-icons/md';
@@ -13,6 +14,8 @@ import styles from '../styles/auth.module.scss';
 const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const validation = {
     name: /^[A-Z]+/,
@@ -33,6 +36,7 @@ const SignUp = () => {
       const { data } = await axios.post('/api/signup', formData);
       console.log(data);
       setLoading(false);
+      router.push('/verify?' + data.user._id);
     } catch (error) {
       console.log('signUp error:', error);
       setLoading(false);

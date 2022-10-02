@@ -34,10 +34,12 @@
     }
 
     button {
-      padding: 8px 30px;
-      font-weight: 700;
+      padding: 7px;
+      font-weight: 600;
+      font-size: 15px;
       cursor: pointer;
       border-radius: 7px;
+      border: none;
 
       &.signUp {
         background: $primary-color;
