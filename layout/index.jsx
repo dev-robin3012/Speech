@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   const router = useRouter();
   const { userId } = router.query;
 
-  return loggedUser ? (
+  return loggedUser?.isVerified ? (
     <main className={styles.container}>
       <div
         className={`${styles.sidebar} ${

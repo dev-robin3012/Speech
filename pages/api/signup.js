@@ -1,11 +1,11 @@
 import { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import emailTemplate from '../../assets/emailTemplate';
+import otpGenerate from '../../helpers/otpGenerate';
 import dbConnection from '../../lib/db.connection';
 import User from '../../model/user.model';
-import otpGenerate from '../../utils/otpGenerate';
 
-const handleSignup = async (req, res, next) => {
+const handleSignup = async (req, res) => {
   await dbConnection();
 
   try {
@@ -26,7 +26,7 @@ const handleSignup = async (req, res, next) => {
 
     delete saveUser._doc.password;
 
-    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '1h' });
+    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '1m' });
 
     const message = {
       from: `"Speech" <${process.env.smtp_email}>`,

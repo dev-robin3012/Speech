@@ -6,9 +6,11 @@ import React, { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { MdAlternateEmail, MdPassword } from 'react-icons/md';
 import { TbUserPlus } from 'react-icons/tb';
+import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
+import { setUserLogIn } from '../redux/reducers/user.reducer';
 import styles from '../styles/auth.module.scss';
 
 const SignUp = () => {
@@ -16,6 +18,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const validation = {
     name: /^[A-Z]+/,
@@ -34,9 +37,9 @@ const SignUp = () => {
 
     try {
       const { data } = await axios.post('/api/signup', formData);
-      console.log(data);
       setLoading(false);
-      router.push('/verify?' + data.user._id);
+      dispatch(setUserLogIn(data.user));
+      router.push('/verify?user=' + data.user._id);
     } catch (error) {
       console.log('signUp error:', error);
       setLoading(false);
@@ -53,7 +56,7 @@ const SignUp = () => {
 
       <form className={styles.auth_form} onSubmit={handleRegister}>
         <div>
-          <h1>Register</h1>
+          <h1 className="logo">Speech</h1>
           <p>You and your friends always connected.</p>
         </div>
 

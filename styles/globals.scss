@@ -35,8 +35,8 @@ a {
   color: $primary-color;
 }
 
-// @media (prefers-color-scheme: dark) {
-//   html {
-//     color-scheme: dark;
-//   }
-// }
+.logo {
+  font-size: 50px;
+  font-weight: 800;
+  color: $primary-color;
+}
