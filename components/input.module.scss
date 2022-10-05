@@ -1,0 +1,122 @@
+@import '../styles/variables.scss';
+
+.input_group {
+  display: flex;
+  align-items: center;
+  background: azure;
+  border-radius: 5px;
+  padding: 5px 7px 5px 10px;
+  border: 2px solid azure;
+  position: relative;
+  transition: border 0.5s ease;
+
+  svg {
+    font-size: 20px;
+    color: darkslategrey;
+  }
+
+  input {
+    padding: 7px 10px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 550;
+    outline: none;
+    background: azure;
+
+    &::placeholder {
+      font-size: 15px;
+      color: azure;
+      font-weight: 550;
+      transition: all ease 0.3s;
+    }
+  }
+
+  .hidePassword,
+  .showPassword {
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
+  label {
+    position: absolute;
+    left: 40px;
+    transform: translateY(0);
+    font-size: 16px;
+    font-weight: 550;
+    color: gray;
+    cursor: text;
+    transition: transform 300ms;
+  }
+
+  .error_tip {
+    position: relative;
+
+    .error_info {
+      color: red;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:hover ~ .error_message {
+        display: block;
+        position: absolute;
+        background: $bg-color;
+        width: max-content;
+        right: -3px;
+        padding: 2px 10px;
+        border-radius: 3px;
+        top: -25px;
+        box-shadow: 0px 0px 5px gray;
+        font-size: 12px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          right: 3px;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: $bg-color transparent transparent transparent;
+        }
+      }
+    }
+
+    .error_message {
+      display: none;
+    }
+  }
+
+  &:focus-within,
+  input:not(:placeholder-shown) ~ {
+    border: 2px solid $primary-color;
+
+    label {
+      transition: transform 300ms, background 500ms ease-in;
+      transform: translateY(-94%) scale(0.7);
+      transform-origin: left;
+      background: $bg-color;
+      padding: 2px 15px;
+      border-radius: 20px;
+      border: 1px solid $primary-color;
+      color: azure;
+      left: 30px;
+    }
+
+    input::placeholder {
+      color: #aab3bd;
+    }
+  }
+}
+
+.error {
+  border: 2px solid red;
+
+  &:focus-within,
+  input:not(:placeholder-shown) ~ {
+    border: 2px solid red;
+    label {
+      border: 1px solid red;
+    }
+  }
+}

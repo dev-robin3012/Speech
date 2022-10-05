@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Auth from '../components/Auth';
 import { user } from '../redux/reducers/user.reducer';
 import styles from './layout.module.scss';
 import Sidebar from './SideBar';
@@ -12,7 +11,7 @@ const Layout = ({ children }) => {
   const router = useRouter();
   const { userId } = router.query;
 
-  return loggedUser ? (
+  return loggedUser?.isVerified ? (
     <main className={styles.container}>
       <div
         className={`${styles.sidebar} ${
@@ -31,7 +30,7 @@ const Layout = ({ children }) => {
       </div>
     </main>
   ) : (
-    <Auth />
+    children
   );
 };
 

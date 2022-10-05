@@ -1,15 +1,16 @@
-const { default: mongoose } = require('mongoose');
+import { model, Schema } from 'mongoose';
 
-const userModel = new mongoose.Schema(
+const userModel = new Schema(
   {
-    phone: { type: String, required: true, unique: true },
     name: String,
-    user_id: String,
-    avatar: String,
-    isActive: { type: Boolean, default: true },
+    email: { type: String, required: true, unique: true },
+    password: String,
+    avatar: { type: String, default: '' },
+    isVerified: { type: Boolean, default: false },
+    verifyToken: String,
   },
   { timestamps: true }
 );
 
-const User = mongoose.model('User', userModel) || mongoose.models.User;
+const User = model('User', userModel);
 export default User;

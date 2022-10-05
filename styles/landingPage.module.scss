@@ -1,0 +1,50 @@
+@import './variables.scss';
+
+.landing_wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px lightblue;
+    text-align: center;
+    color: azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    .image {
+      height: 300px;
+      width: 300px;
+      position: relative;
+
+      @media (max-width: 350px) {
+        width: 230px;
+      }
+    }
+
+    button {
+      padding: 7px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: none;
+
+      &.signUp {
+        background: $primary-color;
+        border: 1px solid $primary-color;
+      }
+      &.signIn {
+        border: inherit;
+      }
+    }
+    @media (max-width: 480px) {
+      box-shadow: none;
+    }
+  }
+}
