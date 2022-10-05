@@ -26,7 +26,12 @@ const handleSignup = async (req, res) => {
 
     delete saveUser._doc.password;
 
-    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '1m' });
+    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '5m' });
+    const refreshToken = jwt.sign(
+      saveUser._doc,
+      'fbf8a6c2b878d5060a87a25f4fbe3b9b36f5c876',
+      { expiresIn: '1h' }
+    );
 
     const message = {
       from: `"Speech" <${process.env.smtp_email}>`,
@@ -39,7 +44,7 @@ const handleSignup = async (req, res) => {
 
     return res.status(201).send({
       message: 'Sign Up Successful.',
-      user: { ...saveUser._doc, accessToken },
+      user: { ...saveUser._doc, accessToken, refreshToken },
     });
   } catch (error) {
     res.status(500).send('Something wrong in server. Try again...');

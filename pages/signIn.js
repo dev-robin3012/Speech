@@ -1,17 +1,25 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BiLogIn } from 'react-icons/bi';
 import { FiUser } from 'react-icons/fi';
 import { MdPassword } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
+import { client } from '../lib/client';
+import { setUserLogIn } from '../redux/reducers/user.reducer';
 import styles from '../styles/auth.module.scss';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const validation = {
     email: /^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/,
@@ -22,6 +30,20 @@ const SignIn = () => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { data } = await client.post('signIn', formData);
+      dispatch(setUserLogIn(data.user));
+      setLoading(false);
+      !data.user.isVerified && router.push('/verify?user=' + data.user._id);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <AuthLayout>
       <Head>
@@ -30,7 +52,7 @@ const SignIn = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <form className={styles.auth_form}>
+      <form className={styles.auth_form} onSubmit={handleLogin}>
         <div>
           <h1>Login</h1>
           <p>You and your friends always connected.</p>
@@ -64,13 +86,15 @@ const SignIn = () => {
 
         <Button
           label="Sign In"
+          loading={loading}
           disabled={
             !formData.email ||
             !validation.email.test(formData.email) ||
             !formData.password ||
-            !validation.password.test(formData.password)
+            !validation.password.test(formData.password) ||
+            loading
           }
-          type="button"
+          type="submit"
           icon={<BiLogIn />}
         />
 

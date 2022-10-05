@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
-const checkTokenValidity = async (payload) => {
+const checkTokenValidity = async (token, signature) => {
   try {
-    const token = payload.split(' ')[1];
-    const decoded = await jwt.verify(token, 'secret');
+    // const token = payload.split(' ')[1];
+    const decoded = await jwt.verify(token, signature);
     return { status: 200, user: decoded };
   } catch (error) {
     return { status: 401, message: error.message };
