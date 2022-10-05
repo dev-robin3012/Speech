@@ -1,13 +1,23 @@
 import checkTokenValidity from '../../helpers/checkTokenValidity';
+import {
+  accessTokenGenerate,
+  refreshTokenGenerate,
+} from '../../helpers/tokenGenerator';
 
 const updateAccessToken = async (req, res) => {
   try {
-    const res = await checkTokenValidity(
+    const { status, user } = await checkTokenValidity(
       req.headers['refreshtoken'],
-      'fbf8a6c2b878d5060a87a25f4fbe3b9b36f5c876'
+      process.env.REFRESH_TOKEN_SECRET
     );
 
-    console.log(res);
+    delete user.iat;
+    delete user.exp;
+
+    const accessToken = await accessTokenGenerate(user);
+    const refreshToken = await refreshTokenGenerate(user);
+
+    return res.status(204).send({ accessToken, refreshToken });
   } catch (error) {
     console.log(error);
   }

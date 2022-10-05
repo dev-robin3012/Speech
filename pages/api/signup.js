@@ -1,7 +1,10 @@
 import { hash } from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import emailTemplate from '../../assets/emailTemplate';
 import otpGenerate from '../../helpers/otpGenerate';
+import {
+  accessTokenGenerate,
+  refreshTokenGenerate,
+} from '../../helpers/tokenGenerator';
 import dbConnection from '../../lib/db.connection';
 import User from '../../model/user.model';
 
@@ -26,12 +29,8 @@ const handleSignup = async (req, res) => {
 
     delete saveUser._doc.password;
 
-    const accessToken = jwt.sign(saveUser._doc, 'secret', { expiresIn: '5m' });
-    const refreshToken = jwt.sign(
-      saveUser._doc,
-      'fbf8a6c2b878d5060a87a25f4fbe3b9b36f5c876',
-      { expiresIn: '1h' }
-    );
+    const accessToken = await accessTokenGenerate(saveUser._doc);
+    const refreshToken = await refreshTokenGenerate(saveUser._doc);
 
     const message = {
       from: `"Speech" <${process.env.smtp_email}>`,

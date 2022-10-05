@@ -1,4 +1,7 @@
-import jwt from 'jsonwebtoken';
+import {
+  accessTokenGenerate,
+  refreshTokenGenerate,
+} from '../../helpers/tokenGenerator';
 import dbConnection from '../../lib/db.connection';
 import User from '../../model/user.model';
 
@@ -8,14 +11,14 @@ const handleSignIn = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
+    if (!user) {
+      return res.status(404).send('There is no account for this email.');
+    }
+
     delete user._doc.password;
 
-    const accessToken = jwt.sign(user._doc, 'secret', { expiresIn: '5m' });
-    const refreshToken = jwt.sign(
-      user._doc,
-      'fbf8a6c2b878d5060a87a25f4fbe3b9b36f5c876',
-      { expiresIn: '1h' }
-    );
+    const accessToken = await accessTokenGenerate(user._doc);
+    const refreshToken = await refreshTokenGenerate(user._doc);
 
     return res.status(201).send({
       message: 'Sign In Successful.',

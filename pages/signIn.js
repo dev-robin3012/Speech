@@ -40,6 +40,7 @@ const SignIn = () => {
       !data.user.isVerified && router.push('/verify?user=' + data.user._id);
     } catch (error) {
       setLoading(false);
+      error.response.status === 404 && console.log(error.response.data);
       console.log(error);
     }
   };

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/Button';
 import AuthLayout from '../layout/AuthLayout';
 import { protectedClient } from '../lib/client';
@@ -11,15 +11,18 @@ import styles from '../styles/auth.module.scss';
 const Verify = () => {
   const loggedUser = useSelector(user);
   const router = useRouter();
-
-  // console.log(loggedUser.accessToken);
+  const dispatch = useDispatch();
 
   const handleSendCode = async () => {
     try {
       const { data } = await protectedClient.post(`${router.asPath}`);
       console.log(data);
     } catch (error) {
-      console.log(error);
+      if (error.status === 401) {
+        // dispatch(userLogout());
+        // router.push('/');
+      }
+      console.log('user logout:', error);
     }
   };
 
