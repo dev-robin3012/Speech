@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
-    "@trycourier/courier": "^3.15.0",
-    "@vonage/server-sdk": "^2.11.2",
     "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",

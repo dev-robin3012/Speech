@@ -17,7 +17,7 @@ const updateAccessToken = async (req, res) => {
     const accessToken = await accessTokenGenerate(user);
     const refreshToken = await refreshTokenGenerate(user);
 
-    return res.status(204).send({ accessToken, refreshToken });
+    return res.status(200).send({ accessToken, refreshToken });
   } catch (error) {
     console.log(error);
   }
