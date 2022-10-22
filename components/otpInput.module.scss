@@ -1,0 +1,49 @@
+@import '../styles/variables.scss';
+
+.input_wrapper {
+  display: flex;
+  gap: 2px;
+  border: 1px solid transparent;
+  margin: auto;
+  border-radius: 5px;
+  position: relative;
+
+  .single_box {
+    height: 40px;
+    border-radius: 8px;
+    width: 40px;
+    border: 1px solid green;
+    cursor: text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-weight: 400;
+    }
+  }
+
+  input {
+    height: 100%;
+    width: 38px;
+    outline: none;
+    font-size: 24px;
+    position: absolute;
+    transition: all 0.5s ease;
+    border-radius: 6px;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    border: 1px solid green;
+    border-bottom: 3px solid green;
+    background: $bg-color;
+    color: #fff;
+    text-align: center;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

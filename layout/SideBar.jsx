@@ -42,7 +42,9 @@ const Sidebar = () => {
                   </span>
                   <time>2min ago</time>
                 </h3>
-                <p className={i % 2 === 0 && styles.unread}>{user.message}</p>
+                <p className={i % 2 === 0 ? styles.unread : ''}>
+                  {user.message}
+                </p>
               </div>
             </li>
           </Link>
@@ -58,7 +60,9 @@ const Sidebar = () => {
                   </span>
                   <time>2min ago</time>
                 </h3>
-                <p className={i % 2 === 0 && styles.unread}>{user.message}</p>
+                <p className={i % 2 === 0 ? styles.unread : ''}>
+                  {user.message}
+                </p>
               </div>
             </li>
           </Link>

@@ -1,0 +1,31 @@
+@import '../styles/variables.scss';
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .topbar {
+    max-width: 1440px;
+    margin: auto;
+    padding: 10px 100px;
+    border-bottom: 1px solid lightblue;
+    color: $primary-color;
+
+    @media (max-width: 768px) {
+      padding: 7px 70px;
+    }
+    @media (max-width: 480px) {
+      padding: 5px 50px;
+    }
+    @media (max-width: 380px) {
+      padding: 3px 30px;
+    }
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // height: calc(100vh - 100px);
+  }
+}
