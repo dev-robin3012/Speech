@@ -1,11 +1,17 @@
 import React from 'react';
 import styles from './button.module.scss';
 
-const Button = ({ label, icon, loading, ...rest }) => (
+const Button = ({
+  label,
+  icon,
+  loading,
+  loadingLabel = 'Wait...',
+  ...rest
+}) => (
   <button className={styles.button} {...rest}>
     {loading ? (
       <>
-        <span>Wait...</span>
+        <span>{loadingLabel}</span>
         <span className={styles.spinner}></span>
       </>
     ) : (

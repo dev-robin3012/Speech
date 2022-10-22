@@ -7,6 +7,7 @@ import { FiUser } from 'react-icons/fi';
 import { MdAlternateEmail, MdPassword } from 'react-icons/md';
 import { TbUserPlus } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
@@ -42,6 +43,7 @@ const SignUp = () => {
       router.push('/verify?user=' + data.user._id);
     } catch (error) {
       console.log('signUp error:', error);
+      toast.error(error.response.data || 'Server error.');
       setLoading(false);
     }
   };

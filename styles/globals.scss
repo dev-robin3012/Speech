@@ -22,6 +22,15 @@ a {
   text-decoration: none;
 }
 
+.anchor {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.anchor:hover {
+  color: $primary-color;
+}
+
 ::-webkit-scrollbar {
   width: 7px;
 }

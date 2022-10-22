@@ -16,6 +16,7 @@ const handleSignIn = async (req, res) => {
     }
 
     delete user._doc.password;
+    delete user._doc.verifyToken;
 
     const accessToken = await accessTokenGenerate(user._doc);
     const refreshToken = await refreshTokenGenerate(user._doc);

@@ -1,6 +1,4 @@
 import { hash } from 'bcrypt';
-import emailTemplate from '../../assets/emailTemplate';
-import otpGenerate from '../../helpers/otpGenerate';
 import {
   accessTokenGenerate,
   refreshTokenGenerate,
@@ -16,9 +14,6 @@ const handleSignup = async (req, res) => {
 
     if (user) return res.status(409).send('This email is already registered.');
 
-    const otp = await otpGenerate();
-
-    // const verifyToken = await hash(otp.toString(), 10);
     const hashPass = await hash(req.body.password, 10);
 
     const saveUser = await User.create({
@@ -32,22 +27,13 @@ const handleSignup = async (req, res) => {
     const accessToken = await accessTokenGenerate(saveUser._doc);
     const refreshToken = await refreshTokenGenerate(saveUser._doc);
 
-    const message = {
-      from: `"Speech" <${process.env.smtp_email}>`,
-      to: req.body.email,
-      subject: 'Verify User',
-      html: emailTemplate(req.body.name, otp),
-    };
-
-    // await transporter.sendMail(message);
-
     return res.status(201).send({
       message: 'Sign Up Successful.',
       user: { ...saveUser._doc, accessToken, refreshToken },
     });
   } catch (error) {
-    res.status(500).send('Something wrong in server. Try again...');
     console.log(error);
+    return res.status(500).send('Something wrong in server. Try again...');
   }
 };
 
