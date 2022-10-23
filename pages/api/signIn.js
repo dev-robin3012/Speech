@@ -1,3 +1,4 @@
+import { compare } from 'bcrypt';
 import {
   accessTokenGenerate,
   refreshTokenGenerate,
@@ -12,7 +13,13 @@ const handleSignIn = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
-      return res.status(404).send('There is no account for this email.');
+      return res.status(401).send('There is no account for this email.');
+    }
+
+    const match = await compare(req.body.password, user.password);
+
+    if (!match) {
+      return res.status(401).send("Password doesn't match.");
     }
 
     delete user._doc.password;

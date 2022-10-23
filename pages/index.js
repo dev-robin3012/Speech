@@ -1,12 +1,23 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import landingImage from '../assets/chat.gif';
 import Button from '../components/Button';
+import { user } from '../redux/reducers/user.reducer';
 import styles from '../styles/landingPage.module.scss';
 
 export default function LandingPage() {
-  // const loggedUser = useSelector(user);
+  const loggedUser = useSelector(user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loggedUser && !loggedUser?.isVerified) {
+      router.push('/verify?user=' + loggedUser?._id);
+    }
+  }, [loggedUser, router]);
 
   return (
     <div>
@@ -16,24 +27,27 @@ export default function LandingPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.landing_wrapper}>
-        <div className={styles.content}>
-          <div>
-            <h1 className="logo">Speech</h1>
-            <p>Get Start With Sign Up or Sign In.</p>
-          </div>
-          <div className={styles.image}>
-            <Image src={landingImage} alt="" layout="fill" />
-          </div>
-          <Link href="/signUp">
-            <Button label="Sign Up"></Button>
-          </Link>
+      {!loggedUser && (
+        <div className={styles.landing_wrapper}>
+          <div className={styles.content}>
+            <div>
+              <h1 className="logo">Speech</h1>
+              <p>Get Start With Sign Up or Sign In.</p>
+            </div>
+            <div className={styles.image}>
+              <Image src={landingImage} alt="" layout="fill" />
+            </div>
+            <Link href="/signUp">
+              <Button label="Sign Up"></Button>
+            </Link>
 
-          <Link href="/signIn">
-            <button className={styles.signIn}>Sign In</button>
-          </Link>
+            <Link href="/signIn">
+              <button className={styles.signIn}>Sign In</button>
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
+      {loggedUser?.isVerified && <h1>Hello World</h1>}
     </div>
   );
 }
