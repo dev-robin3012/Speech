@@ -15,8 +15,6 @@ const sendVerificationCode = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET
     );
 
-    console.log({ status, message, user });
-
     if (status !== 200) throw { status, message };
 
     const userInDB = await User.findById(req.query.user);
