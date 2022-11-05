@@ -2,15 +2,19 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import landingImage from '../assets/chat.gif';
 import Button from '../components/Button';
+import Conversation from '../components/Conversation';
+import Layout from '../layout';
 import { user } from '../redux/reducers/user.reducer';
 import styles from '../styles/landingPage.module.scss';
+import { ChatContext } from './_app';
 
 export default function LandingPage() {
   const loggedUser = useSelector(user);
+  const { chatOn } = useContext(ChatContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -47,7 +51,9 @@ export default function LandingPage() {
           </div>
         </div>
       )}
-      {loggedUser?.isVerified && <h1>Hello World</h1>}
+      {loggedUser?.isVerified && (
+        <Layout>{chatOn ? <Conversation /> : <h1>Hello World</h1>}</Layout>
+      )}
     </div>
   );
 }

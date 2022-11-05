@@ -1,15 +1,13 @@
 @import './variables.scss';
 
 .wrapper {
-  height: 100%;
-  width: 100%;
-  position: fixed;
   padding: 10px;
-  top: 0;
-  left: 0;
+  height: 100vh;
   display: flex;
   flex-wrap: wrap;
   gap: 1.5%;
+  max-width: 1440px;
+  margin: auto;
 
   .leftSide {
     flex-basis: 35%;
@@ -36,6 +34,15 @@
       margin: auto;
       border-radius: 50%;
       overflow: hidden;
+
+      @media (max-width: 768px) {
+        height: 170px;
+        width: 170px;
+      }
+      @media (max-width: 375px) {
+        height: 120px;
+        width: 120px;
+      }
     }
     .identity {
       display: flex;
@@ -61,6 +68,9 @@
         cursor: pointer;
       }
     }
+    @media (max-width: 600px) {
+      flex-basis: 100%;
+    }
   }
   .rightSide {
     flex-basis: 63.5%;
@@ -70,6 +80,9 @@
     color: #fff;
     padding: 15px;
     text-align: start;
+    max-height: 100%;
+    overflow: auto;
+
     h2 {
       color: lightblue;
       margin-bottom: 5px;
@@ -78,5 +91,12 @@
       font-size: 19px;
       letter-spacing: 0.5px;
     }
+    @media (max-width: 600px) {
+      flex-basis: 100%;
+      max-height: fit-content;
+    }
+  }
+  @media (max-width: 600px) {
+    gap: 15px;
   }
 }

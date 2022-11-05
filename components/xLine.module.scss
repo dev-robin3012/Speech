@@ -23,4 +23,8 @@
     width: 100%;
     border-bottom: 1px solid #fff;
   }
+
+  @media (max-width: 768px) {
+    margin: 15px 0;
+  }
 }

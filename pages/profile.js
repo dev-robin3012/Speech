@@ -19,8 +19,6 @@ const Profile = () => {
   const router = useRouter();
   const { query, back } = router;
 
-  // console.log(query.user === _id);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftSide}>

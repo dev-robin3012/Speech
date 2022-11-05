@@ -1,9 +1,10 @@
 @import '../styles/variables.scss';
 
 .sidebar_container {
-  overflow-y: auto;
   color: azure;
-  height: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 
   .header {
     position: sticky;
@@ -64,6 +65,9 @@
   }
 
   .sidebar_items {
+    max-height: 69vh;
+    overflow: auto;
+
     li {
       display: flex;
       gap: 10px;
@@ -114,13 +118,15 @@
   }
 
   .add_friend {
-    position: sticky;
+    position: absolute;
+    right: 0;
+    left: 0;
     bottom: 0px;
     padding: 15px 20px;
-    background: $bg-color;
+    background: #022436;
 
     button {
-      background: #022436;
+      background: $bg-color;
       padding: 7px;
       width: 100%;
       border: none;
@@ -145,9 +151,3 @@
     }
   }
 }
-
-// @media (max-width: 600px) {
-//   .sidebar_container {
-//     width: 100%;
-//   }
-// }

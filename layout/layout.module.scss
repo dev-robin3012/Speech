@@ -8,6 +8,7 @@
     min-width: 350px;
     width: 350px;
     background: #022436;
+    overflow-x: hidden;
   }
 
   .conversation {
@@ -33,21 +34,9 @@
 
   @media (max-width: 600px) {
     .sidebar {
-      position: absolute;
-      top: 0%;
-      bottom: 0%;
-      left: 0;
-      right: 0;
       width: 100%;
-      // z-index: 100;
     }
-
-    .sidebar_small_style {
-      display: none;
-    }
-
-    .conversation_small_style {
-      display: block;
+    .conversation {
       width: 100%;
     }
   }

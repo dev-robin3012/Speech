@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaArrowLeft, FaUserCircle } from 'react-icons/fa';
 import { TbAccessPointOff } from 'react-icons/tb';
+import { ChatContext } from '../pages/_app';
 import styles from './topbar.module.scss';
 
 const TopBar = ({ user }) => {
+  const { setChatOn } = useContext(ChatContext);
+
   return (
     <div className={styles.topbar_container}>
-      <Link href="/">
-        <FaArrowLeft className={styles.backIcon} />
-      </Link>
+      <FaArrowLeft className={styles.backIcon} onClick={() => setChatOn()} />
 
       <div className={styles.identity}>
         <FaUserCircle className={styles.avatar} />
