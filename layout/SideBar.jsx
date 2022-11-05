@@ -1,14 +1,20 @@
 import gsap from 'gsap-trial';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiChatSmile2Line } from 'react-icons/ri';
 import { TbAccessPoint } from 'react-icons/tb';
+import { useSelector } from 'react-redux';
+import avatar from '../assets/avatar.webp';
 import users from '../assets/dummyUsers';
+import { user } from '../redux/reducers/user.reducer';
 import styles from './sidebar.module.scss';
 
 const Sidebar = () => {
+  const { _id } = useSelector(user);
+
   useEffect(() => {
     gsap.to('#logo', {
       scale: 1.3,
@@ -25,7 +31,12 @@ const Sidebar = () => {
           <h1 className={styles.logo}>
             <RiChatSmile2Line id="logo" /> <span>Speech</span>
           </h1>
-          <FaUserCircle />
+          <div className={styles.avatar}>
+            <Link href={`profile?user=${_id}`}>
+              <Image src={avatar} alt="avatar" layout="fill" />
+            </Link>
+          </div>
+          {/* <FaUserCircle /> */}
         </div>
         <input type="text" placeholder="Search" />
       </div>

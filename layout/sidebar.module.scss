@@ -1,7 +1,6 @@
 @import '../styles/variables.scss';
 
 .sidebar_container {
-  padding: 0 10px;
   overflow-y: auto;
   color: azure;
   height: 100%;
@@ -10,7 +9,7 @@
     position: sticky;
     top: 0;
     background: #022436;
-    padding-top: 10px;
+    padding: 10px 20px;
     z-index: 1;
 
     div {
@@ -33,6 +32,15 @@
         }
       }
 
+      .avatar {
+        height: 55px;
+        width: 55px;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
       svg {
         font-size: 30px;
         cursor: pointer;
@@ -40,7 +48,7 @@
     }
     input {
       width: 100%;
-      padding: 7px 10px;
+      padding: 8px 10px;
       border: none;
       outline: none;
       border-radius: 5px;
@@ -60,7 +68,7 @@
       display: flex;
       gap: 10px;
       cursor: pointer;
-      padding: 15px 0;
+      padding: 12px 20px;
       border-bottom: 2px dashed $bg-color;
       transition: all 1s ease-in-out;
 
@@ -107,25 +115,29 @@
 
   .add_friend {
     position: sticky;
-    bottom: 10px;
-    background: #022436;
-    margin-top: 10px;
+    bottom: 0px;
+    padding: 15px 20px;
+    background: $bg-color;
 
     button {
       background: #022436;
-      padding: 5px;
+      padding: 7px;
       width: 100%;
       border: none;
       cursor: pointer;
       color: azure;
       font-size: 16px;
       font-weight: 700;
-      border-radius: 5 px;
-      box-shadow: 0px 0px 10px #f0ffff;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      transition: 0.5s ease box-shadow;
+
+      &:hover {
+        box-shadow: 0px 0px 10px 1px $primary-color;
+      }
 
       svg {
         font-size: 25px;
