@@ -7,8 +7,8 @@ const SingleMessage = ({ message }) => {
     <div
       className={
         message.id % 2 === 0
-          ? `animate__animated  animate__lightSpeedInRight ${styles.sent_message}`
-          : `animate__animated animate__lightSpeedInLeft ${styles.received_message}`
+          ? `${styles.sent_message}`
+          : `${styles.received_message}`
       }
     >
       <FaUserCircle className={styles.avatar} />

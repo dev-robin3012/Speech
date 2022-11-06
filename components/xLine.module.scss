@@ -1,0 +1,30 @@
+@import '../styles/variables.scss';
+
+.hr_line {
+  margin: 20px 0;
+  background-color: $bg-color;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: $bg-color;
+
+  span {
+    background: $bg-color;
+    z-index: 100;
+    padding: 0 7px;
+    font-size: 18px;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 50%;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+  }
+
+  @media (max-width: 768px) {
+    margin: 15px 0;
+  }
+}

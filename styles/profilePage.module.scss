@@ -1,0 +1,102 @@
+@import './variables.scss';
+
+.wrapper {
+  padding: 10px;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5%;
+  max-width: 1440px;
+  margin: auto;
+
+  .leftSide {
+    flex-basis: 35%;
+    background: $bg-color;
+    box-shadow: 0px 0px 5px gray;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px;
+
+    .header {
+      font-size: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      svg {
+        cursor: pointer;
+      }
+    }
+
+    .avatar {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      margin: auto;
+      border-radius: 50%;
+      overflow: hidden;
+
+      @media (max-width: 768px) {
+        height: 170px;
+        width: 170px;
+      }
+      @media (max-width: 375px) {
+        height: 120px;
+        width: 120px;
+      }
+    }
+    .identity {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h1 {
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        color: lightblue;
+      }
+    }
+    .socialLinks {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px 0;
+      font-size: 25px;
+
+      svg {
+        cursor: pointer;
+      }
+    }
+    @media (max-width: 600px) {
+      flex-basis: 100%;
+    }
+  }
+  .rightSide {
+    flex-basis: 63.5%;
+    background: $bg-color;
+    box-shadow: 0px 0px 5px gray;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px;
+    text-align: start;
+    max-height: 100%;
+    overflow: auto;
+
+    h2 {
+      color: lightblue;
+      margin-bottom: 5px;
+    }
+    p {
+      font-size: 19px;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 600px) {
+      flex-basis: 100%;
+      max-height: fit-content;
+    }
+  }
+  @media (max-width: 600px) {
+    gap: 15px;
+  }
+}
