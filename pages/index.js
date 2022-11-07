@@ -7,12 +7,14 @@ import { useSelector } from 'react-redux';
 import landingImage from '../assets/chat.gif';
 import Button from '../components/Button';
 import Conversation from '../components/Conversation';
+import useModal from '../hooks/useModal';
 import Layout from '../layout';
 import { user } from '../redux/reducers/user.reducer';
 import styles from '../styles/landingPage.module.scss';
 import { ChatContext } from './_app';
 
 export default function LandingPage() {
+  const { Modal, setShowModal } = useModal();
   const loggedUser = useSelector(user);
   const { chatOn } = useContext(ChatContext);
   const router = useRouter();
@@ -52,7 +54,18 @@ export default function LandingPage() {
         </div>
       )}
       {loggedUser?.isVerified && (
-        <Layout>{chatOn ? <Conversation /> : <h1>Hello World</h1>}</Layout>
+        <Layout>
+          {chatOn ? (
+            <Conversation />
+          ) : (
+            <div>
+              <h1>Hello World</h1>
+              <Modal
+                trigger={<button onClick={setShowModal}>Click me</button>}
+              />
+            </div>
+          )}
+        </Layout>
       )}
     </div>
   );
