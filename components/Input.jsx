@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { BsInfoCircleFill } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
 import styles from './input.module.scss';
 
 const Input = ({
@@ -9,6 +10,7 @@ const Input = ({
   placeholder,
   type,
   prefix,
+  variant,
   onChange,
   validation,
   ...rest
@@ -22,7 +24,7 @@ const Input = ({
     setIsValid(validation.pattern.test(e.target.value));
   };
 
-  return (
+  return variant === 'form' ? (
     <div className={`${styles.input_group} ${!isValid && styles.error}`}>
       {prefix && prefix}
 
@@ -62,6 +64,17 @@ const Input = ({
       <label htmlFor={name} onClick={(e) => inputRef.current.focus()}>
         {label}
       </label>
+    </div>
+  ) : (
+    <div className={styles.input}>
+      <input
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        name={name}
+        {...rest}
+      />
+      <FaSearch />
     </div>
   );
 };

@@ -1,0 +1,44 @@
+@import '/styles/variables.scss';
+
+.container {
+  position: relative;
+
+  .searchBar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .users_container {
+    .user_card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 400px;
+      padding: 10px;
+      border-bottom: 1.5px dashed gray;
+
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .avatar {
+          position: relative;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+        .meta p {
+          color: lightslategray;
+        }
+      }
+    }
+  }
+
+  .modal_footer {
+    position: sticky;
+    bottom: 0;
+  }
+}

@@ -120,3 +120,32 @@
     }
   }
 }
+
+.input {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #022436;
+    color: #f0ffff;
+
+    &:focus {
+      outline: 1px solid $primary-color;
+    }
+  }
+
+  svg {
+    position: absolute;
+    right: 7px;
+    color: azure;
+    top: 0;
+    width: 17px;
+    height: 100%;
+    cursor: pointer;
+  }
+}

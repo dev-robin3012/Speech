@@ -2,30 +2,36 @@ import React, { useRef } from 'react';
 import styles from './modal.module.scss';
 
 const useModal = () => {
+  const modalContainer = useRef(null);
   const modalRef = useRef(null);
 
   const setShowModal = () => {
-    modalRef.current.className = `${styles.wrapper} animate__animated animate__fadeInDown`;
+    modalContainer.current.className = `${styles.wrapper} animate__animated animate__fadeInDown`;
   };
 
   const closeModal = () => {
-    modalRef.current.className = `${styles.wrapper} animate__animated animate__fadeOutUp`;
+    modalContainer.current.className = `${styles.wrapper} animate__animated animate__fadeOutUp`;
   };
 
-  const Modal = ({ trigger }) => (
+  const Modal = ({ trigger, children, header }) => (
     <section>
       {trigger}
 
-      <div ref={modalRef} className="hidden">
-        <div className={`${styles.content}`}>
-          <h2>This is a modal</h2>
-          <button onClick={closeModal}>Click me</button>
+      <div
+        ref={modalContainer}
+        className="hidden"
+        onClick={(e) => !modalRef.current.contains(e.target) && closeModal()}
+      >
+        <div className={styles.musk}>
+          <section className={`${styles.content}`} ref={modalRef}>
+            <main>{children}</main>
+          </section>
         </div>
       </div>
     </section>
   );
 
-  return { Modal, setShowModal };
+  return { Modal, setShowModal, closeModal };
 };
 
 export default useModal;

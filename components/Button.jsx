@@ -6,9 +6,12 @@ const Button = ({
   icon,
   loading,
   loadingLabel = 'Wait...',
+  iconPlacement = 'right',
+  bg,
+  color,
   ...rest
 }) => (
-  <button className={styles.button} {...rest}>
+  <button className={styles.button} {...rest} style={{ background: bg, color }}>
     {loading ? (
       <>
         <span>{loadingLabel}</span>
@@ -16,7 +19,8 @@ const Button = ({
       </>
     ) : (
       <>
-        <span>{label}</span> {icon}
+        {iconPlacement === 'left' && icon} <span>{label}</span>{' '}
+        {iconPlacement === 'right' && icon}
       </>
     )}
   </button>

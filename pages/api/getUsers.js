@@ -20,7 +20,7 @@ const getUsers = async (req, res) => {
       .select('-password')
       .select('-isVerified');
 
-    res.status(200).send({ users });
+    res.status(200).send(users);
   } catch ({ status, message }) {
     console.log({ status, message });
     return res.status(status).send(message);
