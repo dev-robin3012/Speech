@@ -8,13 +8,17 @@ import {
   BsInstagram,
   BsTwitter,
 } from 'react-icons/bs';
+import { MdOutlineDocumentScanner } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import avatar from '../assets/avatar.webp';
+import EditProfile from '../components/modals/EditProfile';
 import XLine from '../components/XLine';
+import useModal from '../hooks/useModal';
 import { user } from '../redux/reducers/user.reducer';
 import styles from '../styles/profilePage.module.scss';
 
 const Profile = () => {
+  const { Modal, setShowModal, closeModal } = useModal();
   const { _id } = useSelector(user);
   const router = useRouter();
   const { query, back } = router;
@@ -24,7 +28,9 @@ const Profile = () => {
       <div className={styles.leftSide}>
         <div className={styles.header}>
           <BsArrowLeftCircle onClick={() => back()} />
-          <BiEdit />
+          <Modal trigger={<BiEdit onClick={setShowModal} />}>
+            <EditProfile />
+          </Modal>
         </div>
 
         <div className={styles.avatar}>
@@ -53,7 +59,9 @@ const Profile = () => {
         </div>
       </div>
       <div className={styles.rightSide}>
-        <h2>More About Shahadat</h2>
+        <h2>
+          <MdOutlineDocumentScanner /> More About Shahadat
+        </h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi repudiandae consequuntur

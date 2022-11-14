@@ -49,11 +49,7 @@ const Sidebar = () => {
 
       <ul className={styles.sidebar_items}>
         {users.map((user, i) => (
-          <li
-            key={i}
-            className="animate__animated animate__zoomIn"
-            onClick={() => setChatOn(user.id)}
-          >
+          <li key={i} className="" onClick={() => setChatOn(user.id)}>
             <FaUserCircle />
             <div>
               <h3>
