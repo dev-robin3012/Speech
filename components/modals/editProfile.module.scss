@@ -1,0 +1,36 @@
+@import '/styles/variables.scss';
+
+.container {
+  max-width: 600px;
+  position: relative;
+
+  .header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    h4 {
+      background: $bg-color;
+      padding: 5px 0;
+      border-bottom: 1px dashed azure;
+    }
+  }
+
+  form {
+    padding: 25px 0;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+
+    div {
+      background: $bg-color;
+      padding-top: 10px;
+    }
+  }
+}

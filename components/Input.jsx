@@ -37,7 +37,7 @@ const Input = ({
           setIsValid(true);
           onChange(e);
         }}
-        onBlur={(e) => validation.pattern && checkValidation(e)}
+        onBlur={(e) => validation?.pattern && checkValidation(e)}
         {...rest}
       />
 

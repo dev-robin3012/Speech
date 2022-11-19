@@ -14,6 +14,7 @@ import AuthLayout from '../layout/AuthLayout';
 import { client } from '../lib/client';
 import { setUserLogIn, user } from '../redux/reducers/user.reducer';
 import styles from '../styles/auth.module.scss';
+import formRegex from '../utils/regex';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -22,11 +23,6 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const loggedUser = useSelector(user);
   const router = useRouter();
-
-  const validation = {
-    email: /^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/,
-    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
-  };
 
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
@@ -83,7 +79,7 @@ const SignIn = () => {
           prefix={<FiUser />}
           onChange={handleChange}
           validation={{
-            pattern: validation.email,
+            pattern: formRegex.email,
             message: 'Try with valid email format.',
           }}
         />
@@ -97,7 +93,7 @@ const SignIn = () => {
           prefix={<MdPassword />}
           onChange={handleChange}
           validation={{
-            pattern: validation.password,
+            pattern: formRegex.password,
             message: 'Min length 6 with capital and small letter.',
           }}
         />
@@ -107,9 +103,9 @@ const SignIn = () => {
           loading={loading}
           disabled={
             !formData.email ||
-            !validation.email.test(formData.email) ||
+            !formRegex.email.test(formData.email) ||
             !formData.password ||
-            !validation.password.test(formData.password) ||
+            !formRegex.password.test(formData.password) ||
             loading
           }
           type="submit"

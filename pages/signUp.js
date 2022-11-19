@@ -13,6 +13,7 @@ import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
 import { setUserLogIn, user } from '../redux/reducers/user.reducer';
 import styles from '../styles/auth.module.scss';
+import formRegex from '../utils/regex';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -22,12 +23,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const loggedUser = useSelector(user);
 
-  const validation = {
-    name: /^[A-Z]+/,
-    email: /^[A-Za-z0-9_.+-]+@[a-zA-Z]+\.[a-z]+/,
-    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
-    confirm_password: new RegExp(formData.password),
-  };
+  const confirm_password = new RegExp(formData.password);
 
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
@@ -84,7 +80,7 @@ const SignUp = () => {
           prefix={<FiUser />}
           onChange={handleChange}
           validation={{
-            pattern: validation.name,
+            pattern: formRegex.name,
             message: 'Name should be capitalize.',
           }}
         />
@@ -98,7 +94,7 @@ const SignUp = () => {
           prefix={<MdAlternateEmail />}
           onChange={handleChange}
           validation={{
-            pattern: validation.email,
+            pattern: formRegex.email,
             message: 'Try with valid email format.',
           }}
         />
@@ -112,7 +108,7 @@ const SignUp = () => {
           prefix={<MdPassword />}
           onChange={handleChange}
           validation={{
-            pattern: validation.password,
+            pattern: formRegex.password,
             message: 'Min length 6 with capital and small letter.',
           }}
         />
@@ -126,7 +122,7 @@ const SignUp = () => {
           prefix={<MdPassword />}
           onChange={handleChange}
           validation={{
-            pattern: validation.confirm_password,
+            pattern: confirm_password,
             message: "Doesn't match with password.",
           }}
         />
@@ -150,13 +146,13 @@ const SignUp = () => {
           loading={loading}
           disabled={
             !formData.name ||
-            !validation.name.test(formData.name) ||
+            !formRegex.name.test(formData.name) ||
             !formData.email ||
-            !validation.email.test(formData.email) ||
+            !formRegex.email.test(formData.email) ||
             !formData.password ||
-            !validation.password.test(formData.password) ||
+            !formRegex.password.test(formData.password) ||
             !formData.confirm_password ||
-            !validation.confirm_password.test(formData.confirm_password) ||
+            !confirm_password.test(formData.confirm_password) ||
             !formData?.agree ||
             loading
           }
