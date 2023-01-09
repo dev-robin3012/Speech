@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import Input from '../Input';
+import Input from '../form/Input';
 import styles from './explore.module.scss';
 import avatar from '/assets/avatar.webp';
 import Button from '/components/Button';

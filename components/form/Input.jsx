@@ -16,7 +16,6 @@ const Input = ({
   ...rest
 }) => {
   const [isValid, setIsValid] = useState(true);
-  const [validTip, setValidTip] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef();
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import formRegex from '../../utils/regex';
 import Button from '../Button';
-import Input from '../Input';
+import Input from '../form/Input';
+import TextArea from '../form/TextArea';
 import styles from './editProfile.module.scss';
 
 const EditProfile = () => {
@@ -36,6 +37,47 @@ const EditProfile = () => {
           name="headline"
           placeholder="Headline"
           defaultValue="In publishing and graphic design, Lorem ipsum"
+          variant="form"
+          onChange={(val) => console.log(val)}
+        />
+        <TextArea
+          label="Bio"
+          rows={3}
+          name="bio"
+          placeholder="Bio"
+          onChange={(e) => console.log(e)}
+          defaultValue="In publishing and graphic design, Lorem ipsum In publishing and graphic design, Lorem ipsum"
+        />
+        <TextArea
+          label="Description"
+          name="about"
+          rows={5}
+          placeholder="About"
+          onChange={(e) => console.log(e)}
+          defaultValue="In publishing and graphic design, Lorem ipsum In publishing and graphic design, Lorem ipsum"
+        />
+        <h5>Social Links</h5>
+        <Input
+          label="Facebook"
+          name="fb_link"
+          placeholder="Put only username except (https://www.facebook.com/)"
+          defaultValue="Robin-273"
+          variant="form"
+          onChange={(val) => console.log(val)}
+        />
+        <Input
+          label="Instagram"
+          name="insta_link"
+          placeholder="Put only username except (https://www.instagram.com/)"
+          defaultValue="@Robin-273"
+          variant="form"
+          onChange={(val) => console.log(val)}
+        />{' '}
+        <Input
+          label="Twitter"
+          name="twit_link"
+          placeholder="Put only username except (https://www.instagram.com/)"
+          defaultValue="@Robin-273"
           variant="form"
           onChange={(val) => console.log(val)}
         />

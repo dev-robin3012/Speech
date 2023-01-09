@@ -9,12 +9,12 @@ import { MdPassword } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Button from '../components/Button';
-import Input from '../components/Input';
 import AuthLayout from '../layout/AuthLayout';
 import { client } from '../lib/client';
 import { setUserLogIn, user } from '../redux/reducers/user.reducer';
 import styles from '../styles/auth.module.scss';
 import formRegex from '../utils/regex';
+import Input from '/components/form/Input';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});

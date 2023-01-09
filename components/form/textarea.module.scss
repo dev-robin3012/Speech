@@ -1,0 +1,46 @@
+@import '/styles/variables.scss';
+
+.input_group {
+  display: flex;
+  align-items: center;
+  background: azure;
+  border-radius: 5px;
+  border: 2px solid azure;
+  position: relative;
+  transition: border 0.5s ease;
+
+  textarea {
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 550;
+    outline: none;
+    background: azure;
+
+    &::placeholder {
+      font-size: 14px;
+      opacity: 0.5;
+      font-weight: 550;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 30px;
+    top: -10px;
+    font-size: 12px;
+    font-weight: 550;
+    color: azure;
+    background: $bg-color;
+    padding: 2px 15px;
+    border-radius: 20px;
+    border: 1px solid $primary-color;
+    cursor: text;
+    transition: transform 300ms;
+  }
+
+  &:focus-within {
+    border: 2px solid $primary-color;
+  }
+}
